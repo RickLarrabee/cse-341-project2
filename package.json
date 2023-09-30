@@ -24,6 +24,7 @@
     "express-validator": "^7.0.1",
     "mongo": "^0.1.0",
     "mongodb": "^6.1.0",
+    "node": "^20.7.0",
     "routers": "^0.1.4",
     "swagger-autogen": "^2.23.6",
     "swagger-ui-express": "^5.0.0",
