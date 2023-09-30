@@ -3,20 +3,36 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
   //#swagger.tags=['Players']  
-    const result = await mongodb.getDatabase().db().collection('players').find();
-    result.toArray().then((players) => {
+    const result = mongodb
+    .getDatabase()
+    .db()
+    .collection('players')
+    .find();
+    result.toArray().then ((err, players) => {
+        if (err) {
+            res.status(400).json({message: err});
+        } else {  
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(players);
+        }
     });
 };
 
-const getSingle = async (req, res, next) => {
+const getSingle = async (req, res) => {
   //#swagger.tags=['Players']  
     const playerId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('players').find({_id: playerId})
-    result.toArray().then((players) => {
+    result = mongodb
+    .getDatabase()
+    .db()
+    .collection('players')
+    .find({_id: playerId});
+    result.toArray().then ((err, players) => {
+        if (err) {
+            res.status(400).json({message: err});
+        } else {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(players);
+        }
     }); 
 };
 
