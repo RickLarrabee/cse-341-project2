@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const playersController = require('../controllers/players');
-const validation = require('../middleware/validate');
+const validation = require('../middleware/validation');
 
 router.get('/', playersController.getAll);
 
