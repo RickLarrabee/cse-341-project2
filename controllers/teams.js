@@ -2,21 +2,37 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
-  //#swagger.tags=['Teams']  
-    const result = await mongodb.getDatabase().db().collection('teams').find();
-    result.toArray().then((teams) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(teams);
+    //#swagger.tags=['Teams']  
+    const result = mongodb
+    .getDatabase()
+    .db()
+    .collection('teams')
+    .find();
+    result.toArray().then ((err, teams) => {
+        if (err) {
+            res.status(400).json({message: err});
+        } else {  
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(teams);
+        }
     });
 };
-
-const getSingle = async (req, res, next) => {
-  //#swagger.tags=['Teams']  
-    const teamId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('teams').find({_id: teamId})
-    result.toArray().then((teams) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(teams);
+  
+const getSingle = async (req, res) => {
+    //#swagger.tags=['Teams']  
+    const playerId = new ObjectId(req.params.id);
+    result = mongodb
+    .getDatabase()
+    .db()
+    .collection('teams')
+    .find({_id: playerId});
+    result.toArray().then ((err, teams) => {
+        if (err) {
+            res.status(400).json({message: err});
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(teams);
+        }
     }); 
 };
 
