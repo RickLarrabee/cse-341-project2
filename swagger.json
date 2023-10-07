@@ -8,7 +8,7 @@
   "host": "https://cse341-project2-vw5k.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/players/": {
